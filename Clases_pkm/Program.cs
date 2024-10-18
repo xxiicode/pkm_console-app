@@ -108,7 +108,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
                     if (pokemonEnemigoActivo?.Vida <= 0)
                     {
                         EscribirLinea($"{pokemonEnemigoActivo.Nombre} ha sido derrotado.");
-                        enemigo.pokemonActualIndex++; // Cambiar al siguiente Pokémon
+                        enemigo.pokemonActualIndex++;
                         // Verificar si hay más Pokémon para usar
                         if (enemigo.pokemonActualIndex >= enemigo.Pokemons.Count)
                         {
@@ -125,7 +125,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
                         }
                     }
                 }
-                else if (accion == 2) // ComerBalla
+                else if (accion == 2) // ComerBaya
                 {
                     pokemonActivo.ComerBaya();
                 }
@@ -186,7 +186,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
                         break; // Terminar la batalla
                     }
 
-                    // Ofrecer la opción de cambiar Pokémon
+                    // Opción de cambiar Pokémon
                     EscribirLinea("Selecciona un nuevo Pokémon:");
                     for (int i = 0; i < pokemonsDelJugador.Count; i++)
                     {
@@ -222,7 +222,4 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
         }
     }
 }
-            
-
-                // Imprimir el estado de los Pokémon
 
