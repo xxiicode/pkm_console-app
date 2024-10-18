@@ -22,7 +22,7 @@ namespace Clases_pkm
         }
         public override void Hablar()
         {
-            EscribirLinea("Mewwwww!");
+            EscribirLinea("¡Mewwwww!");
 
         }    
     }

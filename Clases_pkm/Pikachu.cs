@@ -21,7 +21,7 @@ namespace Clases_pkm
         }
         public override void Hablar()
         {
-            EscribirLinea("Pika Pika!");
+            EscribirLinea("¡Pika Pika!");
         }
     }
 }

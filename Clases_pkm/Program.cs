@@ -5,7 +5,7 @@ namespace Clases_pkm
 {
     internal class Program
     {
-        public static void EscribirLinea(string text, int delay = 50)
+        public static void EscribirLinea(string text, int delay = 10)
         {
             foreach (char c in text)
             {
@@ -154,7 +154,6 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
 
                 // El enemigo ataca al Pokémon del jugador
                 enemigo.Atacar(pokemonActivo);
-
                 // Verificar si el Pokémon del jugador fue derrotado
                 if (pokemonActivo.Vida <= 0)
                 {

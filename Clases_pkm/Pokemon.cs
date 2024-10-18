@@ -11,7 +11,7 @@ namespace Clases_pkm
         private static Random random = new Random();
         private static int BayasRestantes = 3;
 
-        public static void EscribirLinea(string text, int delay = 50)
+        public static void EscribirLinea(string text, int delay = 10)
         {
             foreach (char c in text)
             {

@@ -88,22 +88,6 @@ namespace Clases_pkm
 
             // Realizar el ataque
             enemigoPokemon.Atacar(jugadorPokemon);
-
-            // Verificar si el Pokémon actual ha sido derrotado
-            if (enemigoPokemon.Vida <= 0)
-            {
-                pokemonActualIndex++; // Cambiar al siguiente Pokémon
-
-                // Verificar si hay más Pokémon para usar
-                if (pokemonActualIndex >= Pokemons.Count)
-                {
-                    Console.WriteLine("¡El enemigo ha perdido todos sus Pokémon!");
-                }
-                else
-                {
-                    Console.WriteLine($"El enemigo cambia a {Pokemons[pokemonActualIndex].Nombre}.");
-                }
             }
         }
     }
-}
