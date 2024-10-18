@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Clases_pkm
 {
@@ -14,9 +16,14 @@ namespace Clases_pkm
             }
             Console.WriteLine();
         }
+        // Actualizar el pokemonEnemigo
+        private static Pokemon? pokemonEnemigoActivo;
+        public static void ActualizarPokemonEnemigo(Enemigo enemigo)
+        {
+            pokemonEnemigoActivo = enemigo?.Pokemons[enemigo.pokemonActualIndex];
+        }
 
-
-        private static void Main(string[] args)
+    private static void Main(string[] args)
         {
             // Crear Pokémon del jugador
             List<Pokemon> pokemonsDelJugador = new List<Pokemon>
@@ -28,7 +35,7 @@ namespace Clases_pkm
 
             // Crear un enemigo
             Enemigo enemigo = new Enemigo();
-
+            ActualizarPokemonEnemigo(enemigo);
 
             // Iniciar la batalla
             Console.WriteLine(@"                                  ,'\     
@@ -68,9 +75,9 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
 
             EscribirLinea($"Has elegido a {pokemonActivo.Nombre} para luchar.");
             pokemonActivo.Hablar();
-            Pokemon pokemonEnemigo = enemigo.Pokemons[enemigo.pokemonActualIndex];
-            EscribirLinea($"El enemigo ha elegido a {pokemonEnemigo.Nombre} para luchar.");
-            pokemonEnemigo.Hablar();
+            ActualizarPokemonEnemigo(enemigo);
+            EscribirLinea($"El enemigo ha elegido a {pokemonEnemigoActivo?.Nombre} para luchar.");
+            pokemonEnemigoActivo?.Hablar();
 
             // Simulación de combate
             while (true)
@@ -95,25 +102,26 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
                 // Ejecutar acción
                 if (accion == 1) // Atacar
                 {
-                    pokemonActivo.Atacar(enemigo.Pokemons[enemigo.pokemonActualIndex]);
+                    pokemonActivo.Atacar(pokemonEnemigoActivo ?? new Pikachu(100, 1000));
 
                     // Verificar si el Pokémon enemigo fue derrotado
-                    if (enemigo.Pokemons[enemigo.pokemonActualIndex].Vida <= 0)
+                    if (pokemonEnemigoActivo?.Vida <= 0)
                     {
-                        EscribirLinea($"{enemigo.Pokemons[enemigo.pokemonActualIndex].Nombre} ha sido derrotado.");
+                        EscribirLinea($"{pokemonEnemigoActivo.Nombre} ha sido derrotado.");
                         enemigo.pokemonActualIndex++; // Cambiar al siguiente Pokémon
-
                         // Verificar si hay más Pokémon para usar
                         if (enemigo.pokemonActualIndex >= enemigo.Pokemons.Count)
                         {
                             EscribirLinea("¡El enemigo ha perdido todos sus Pokémon! ¡Has ganado!");
                             EscribirLinea("¡Felicidades, toca una tecla para cerrar el programa");
                             Console.ReadKey();
+                            Environment.Exit(0);
                             break;
                         }
                         else
                         {
-                            EscribirLinea($"El enemigo cambia a {enemigo.Pokemons[enemigo.pokemonActualIndex].Nombre}.");
+                            ActualizarPokemonEnemigo(enemigo);
+                            EscribirLinea($"El enemigo cambia a {pokemonEnemigoActivo.Nombre}.");
                         }
                     }
                 }
@@ -174,6 +182,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
                         EscribirLinea("¡Has perdido! No te quedan Pokémon.");
                         EscribirLinea("¡Game Over!, toca una tecla para cerrar");
                         Console.ReadKey();
+                        Environment.Exit(0);
                         break; // Terminar la batalla
                     }
 
